@@ -25,7 +25,7 @@ require_once('Arrays.php');
                     <h5 class="my-3"></h5>
                     <p class="text-muted mb-1"></p>
                     <div class="d-flex justify-content-center mb-2">
-                    </div><h5 class="section-title h1" id="News">Последние новости</h5>
+                    </div><h5 class="section-title h1" id="News">Новости</h5>
 
                     <section id="team">
                         <div class="container">
