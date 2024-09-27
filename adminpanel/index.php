@@ -15,8 +15,8 @@
     print_r($_SESSION);
 
 ?>
-<link href='../vendor/fontawesome-free/css/all.min.css' rel='stylesheet' type='text/css'>
-<link href='../vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+<link href='../libs/fontawesome-free/css/all.min.css' rel='stylesheet' type='text/css'>
+<link href='../libs/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
 <link href='../css/ruang-admin.min.css' rel='stylesheet'>
 <body id="page-top">
   <div id="wrapper">
@@ -484,10 +484,10 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../libs/jquery/jquery.min.js"></script>
+  <script src="../libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../libs/jquery-easing/jquery.easing.min.js"></script>
   <script src="../js/ruang-admin.min.js"></script>
-  <script src="../vendor/chart.js/Chart.min.js"></script>
+  <script src="../libs/chart.js/Chart.min.js"></script>
   <script src="../../js/demo/chart-area-demo.js"></script>
 </body>
