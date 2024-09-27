@@ -1,4 +1,5 @@
 <?php
+
     if ($_SESSION){
         session_destroy();
         header('Location: ../adminpanel/index.php');
@@ -9,6 +10,7 @@
 
         require_once('../config.php');
         require_once('connect.php');
+
         $configuration = get_config();
         $connect = connect($configuration);
 

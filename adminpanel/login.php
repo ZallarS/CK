@@ -21,7 +21,7 @@
                     <form id="registrationForm" action="../engine/signin.php" method="post">
                         <div class="form-group">
                             <label for="login">Логин</label>
-                            <input type="login" class="form-control" id="login" name="login" placeholder="логин" required />
+                            <input type="text" class="form-control" id="login" name="login" placeholder="логин" required />
                         </div>
                         <div class="form-group">
                             <label for="password">Пароль</label>
