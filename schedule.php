@@ -113,13 +113,8 @@ require_once('Arrays.php');
     }
 </style>
 <html>
-<head>
-    <title>Цифровая кафедра НИУ БелГУ</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/css.css" rel="stylesheet">
-    <script src="scripts/scripts.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
+<?php print_header("Расписание"); ?>
+
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
 
@@ -130,7 +125,7 @@ require_once('Arrays.php');
             <div class="card-body text-center">
                 <h5 class="my-3"></h5>
                 <p class="text-muted mb-1"></p>
-                <div class="d-flex justify-content-center mb-5" ><font size="6">Уважаемые преподаватели и студенты! Расписание Временно не работает по ряду причин. Приносим извинения.</font></div>
+                <div class="d-flex justify-content-center mb-5" ><font size="6">Уважаемые преподаватели и студенты! Расписание временно не работает по ряду причин. Приносим извинения.</font></div>
 
             </div>
         </div>

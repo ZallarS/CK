@@ -1,18 +1,20 @@
 ﻿<?php
-require_once ('modules.php');
-require_once('Arrays.php');
+    require_once('config.php');
+    require_once ('modules.php');
+    require_once('Arrays.php');
+
+    $configuration = get_config();
+
 ?>
-<html>
-<head>
-    <title>Цифровая кафедра НИУ БелГУ</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/css.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
+<?php print_header("Цифровая кафедра  НИУ «БелГУ» "); ?>
+
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
 
     <div class="container py-3">
+        <div class="alert alert-warning" role="alert">
+            Запись на программы ДПО осуществляется в личном кабинете по ссылке - <a href="https://dekanat.bsu.edu.ru/">ИнфоБелГУ: Учебный процесс<a>!
+        </div>
         <nav class="nav " style="background: #212529; padding: 7px 15px 15px 15px">
             <li class=""><a style="color: #ffffff; text-decoration: none; margin: 15px;" href="#News">Новости</a></li>
             <li class=""><a style="color: #ffffff; text-decoration: none; margin: 15px;" href="#about">О кафедре</a></li>
@@ -167,6 +169,5 @@ require_once('Arrays.php');
         </div>
     </div>
 </div>
-<?php print_footer(); ?>
+<?php print_footer($configuration); ?>
 </body>
-</html>
