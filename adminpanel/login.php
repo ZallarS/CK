@@ -1,11 +1,13 @@
 <?php
     session_start();
+
     if($_SESSION)
         header('Location: index.php');
 
     require_once('../config.php');
     require_once ('../modules.php');
     print_header("Авторизация");
+
 ?>
 
 <link href='../libs/fontawesome-free/css/all.min.css' rel='stylesheet' type='text/css'>

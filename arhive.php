@@ -1,10 +1,14 @@
 <?php
-require_once ('modules.php');
-require_once('Arrays.php');
-?>
 
-<html>
-<?php print_header("Архив новостей"); ?>
+    require_once('config.php');
+    require_once ('modules.php');
+    require_once ('engine/connect.php');
+
+    print_header("Архив новостей");
+
+    $connect = connect(get_config());
+
+?>
 
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
@@ -22,18 +26,21 @@ require_once('Arrays.php');
                         <div class="col-lg-4 col-md-15 mb-4 "><div>
 
                                 <?php
-                                $news = get_all_news(0,'none');
 
-                                foreach ($news as $item => $key) {
+                                $sth = $connect->prepare("SELECT * FROM `news` ORDER BY ID DESC");
+                                $sth->execute();
+                                $news = $sth->fetchAll();
+
+                                foreach ($news as $new) {
                                   echo '
                                   <div class="row mb-1" style="min-height: 330px; border-width: 2px;">
-                                    <img style="display: block; max-height:200px; min-height: 200px; " src="'.$key['img'].'"/>
+                                    <img style="display: block; max-height:200px; min-height: 200px; " src="'.$new["header_pathimage"].'"/>
                                     <div class="col-20">
                                     
-                                        <p>'.$key['header'].'</p>
+                                        <p>'.$new['header'].'</p>
                                         
                                         <p>
-                                            <a href="news.php?id='.$key['id'].'" class="text-dark"><u>'.$key['date'].'</u></a>
+                                            <a href="news.php?id='.$new['id'].'" class="text-dark"><u>'.date('d.m.Y',$new["timestmp"]).'</u></a>
                                         </p>
                                     </div>
                                 </div></div></div><div class="col-lg-4"><div>';} ?>
@@ -46,6 +53,10 @@ require_once('Arrays.php');
         </div>
     </div>
 </div>
-<?php print_footer(); ?>
+<?php print_footer(get_config()); ?>
 </body>
-</html>
+
+
+
+
+

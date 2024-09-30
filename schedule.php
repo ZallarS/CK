@@ -1,6 +1,13 @@
 <?php
-require_once ('modules.php');
-require_once('Arrays.php');
+
+    require_once('config.php');
+    require_once('modules.php');
+    require_once ('engine/connect.php');
+
+    print_header("Цифровая кафедра  НИУ «БелГУ» ");
+
+    $connect = connect(get_config());
+
 ?>
 
 <style>
@@ -112,7 +119,7 @@ require_once('Arrays.php');
         opacity: 0.7;
     }
 </style>
-<html>
+
 <?php print_header("Расписание"); ?>
 
 <body style="background-color: rgba(0, 0, 0, 0.05);">
@@ -133,6 +140,5 @@ require_once('Arrays.php');
 </div>
 
 
-<?php print_footer(); ?>
+<?php print_footer(get_config()); ?>
 </body>
-</html>

@@ -3,26 +3,24 @@
 
     require_once('../config.php');
     require_once ('../modules.php');
-    require_once('../Arrays.php');
-    require_once('../links.php');
     print_header("Админ панель");
 
     $configuration = get_config();
 
-    if(empty($_SESSION)){
+    if(empty($_SESSION))
         header('Location: login.php');
-    }
-    print_r($_SESSION);
 
 ?>
+
 <link href='../libs/fontawesome-free/css/all.min.css' rel='stylesheet' type='text/css'>
 <link href='../libs/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
 <link href='../css/ruang-admin.min.css' rel='stylesheet'>
+
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
         <div class="sidebar-brand-icon">
           <img src="../images/logo/logo2.png">
         </div>
@@ -32,7 +30,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="../">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Главная</span></a>
+          <span>Сайт ЦК</span></a>
       </li>
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
@@ -46,13 +44,8 @@
             </a>
             <div id="news" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Bootstrap UI</h6>
-                    <a class="collapse-item" href="alerts.html">Alerts</a>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                    <a class="collapse-item" href="modals.html">Modals</a>
-                    <a class="collapse-item" href="popovers.html">Popovers</a>
-                    <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                    <h6 class="collapse-header">Новости</h6>
+                    <a class="collapse-item" href="alerts.html">Новости</a>
                 </div>
             </div>
         </li>
@@ -64,13 +57,8 @@
           </a>
           <div id="schedule" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                  <h6 class="collapse-header">Bootstrap UI</h6>
-                  <a class="collapse-item" href="alerts.html">Alerts</a>
-                  <a class="collapse-item" href="buttons.html">Buttons</a>
-                  <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                  <a class="collapse-item" href="modals.html">Modals</a>
-                  <a class="collapse-item" href="popovers.html">Popovers</a>
-                  <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                  <h6 class="collapse-header">Расписание</h6>
+                  <a class="collapse-item" href="alerts.html">Расписание</a>
               </div>
           </div>
       </li>
@@ -82,18 +70,13 @@
             </a>
             <div id="programms" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Bootstrap UI</h6>
-                    <a class="collapse-item" href="alerts.html">Alerts</a>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                    <a class="collapse-item" href="modals.html">Modals</a>
-                    <a class="collapse-item" href="popovers.html">Popovers</a>
-                    <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                    <h6 class="collapse-header">Программы</h6>
+                    <a class="collapse-item" href="alerts.html">Программы</a>
                 </div>
             </div>
         </li>
 
-          <hr class="sidebar-divider">
+        <hr class="sidebar-divider">
 
         <div class="sidebar-heading">
             Excel
@@ -106,13 +89,8 @@
             </a>
             <div id="excel_import" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Bootstrap UI</h6>
-                    <a class="collapse-item" href="alerts.html">Alerts</a>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                    <a class="collapse-item" href="modals.html">Modals</a>
-                    <a class="collapse-item" href="popovers.html">Popovers</a>
-                    <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                    <h6 class="collapse-header">Импорт</h6>
+                    <a class="collapse-item" data-toggle="modal" data-target="#exampleModalCenter" id="#modalCenter">Заполнить таблицы</a>
                 </div>
             </div>
         </li>
@@ -124,13 +102,8 @@
             </a>
             <div id="excel_export" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Bootstrap UI</h6>
-                    <a class="collapse-item" href="alerts.html">Alerts</a>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                    <a class="collapse-item" href="modals.html">Modals</a>
-                    <a class="collapse-item" href="popovers.html">Popovers</a>
-                    <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                    <h6 class="collapse-header">Экспорт</h6>
+                    <a class="collapse-item" href="">Экспорт</a>
                 </div>
             </div>
         </li>
@@ -142,20 +115,41 @@
             </a>
             <div id="excel_scripts" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Bootstrap UI</h6>
-                    <a class="collapse-item" href="alerts.html">Alerts</a>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                    <a class="collapse-item" href="modals.html">Modals</a>
-                    <a class="collapse-item" href="popovers.html">Popovers</a>
-                    <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                    <h6 class="collapse-header">Скрипты</h6>
+                    <a class="collapse-item" href="">Скрипты</a>
                 </div>
             </div>
         </li>
-            <hr class="sidebar-divider">
-          <div class="sidebar-heading">
-              Примеры инпутов
-          </div>
+
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Справочники
+        </div>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#handbook"
+               aria-expanded="true" aria-controls="handbook">
+                <i class="far fa-fw fa-window-maximize"></i>
+                <span>Справочники</span>
+            </a>
+            <div id="handbook" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Справочники</h6>
+                    <a class="collapse-item" href="alerts.html">Академические группы</a>
+                    <a class="collapse-item" href="alerts.html">ЦК группы</a>
+                    <a class="collapse-item" href="buttons.html">Ученики</a>
+                    <a class="collapse-item" href="dropdowns.html">Преподаватели</a>
+                    <a class="collapse-item" href="modals.html">Аудитории</a>
+                    <a class="collapse-item" href="popovers.html">Расписание пар</a>
+                </div>
+            </div>
+        </li>
+
+        <hr class="sidebar-divider">
+
+      <div class="sidebar-heading">
+          Примеры инпутов
+      </div>
         <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
           aria-expanded="true" aria-controls="collapseBootstrap">
@@ -344,7 +338,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/man.png" style="max-width: 60px" alt="">
+                    <img class="rounded-circle" src="" style="max-width: 60px" alt="">
                     <div class="status-indicator bg-success"></div>
                   </div>
                   <div class="font-weight-bold">
@@ -355,7 +349,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt="">
+                    <img class="rounded-circle" src="" style="max-width: 60px" alt="">
                     <div class="status-indicator bg-default"></div>
                   </div>
                   <div>
@@ -418,7 +412,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
                 <span class="ml-2 d-none d-lg-inline text-white small"><?php echo $_SESSION['name']; ?></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -442,7 +435,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Тут планируются новости</h1>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Главная</a></li>
+              <li class="breadcrumb-item"><a href="../">Главная</a></li>
               <li class="breadcrumb-item active" aria-current="page">Админ панель</li>
             </ol>
           </div>
@@ -478,6 +471,10 @@
 
     </div>
   </div>
+
+  <!-- Modal Center -->
+  <?php print_popup(); ?>
+
   <?php print_footer($configuration); ?>
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
@@ -490,4 +487,5 @@
   <script src="../js/ruang-admin.min.js"></script>
   <script src="../libs/chart.js/Chart.min.js"></script>
   <script src="../../js/demo/chart-area-demo.js"></script>
+
 </body>

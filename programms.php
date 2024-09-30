@@ -1,15 +1,16 @@
 <?php
-    require_once ('modules.php');
-    require_once('Arrays.php');
 
-    $id = $_GET['id'];
-    $news = get_all_programms($id, 'none');
-    $count = count($news);
+    require_once('config.php');
+    require_once('modules.php');
+    require_once ('engine/connect.php');
+
+    print_header("Курс ДПО");
+
+    $connect = connect(get_config());
 
 ?>
 
-<html>
-<?php print_header("Курс ДПО"); ?>
+<?php  ?>
 
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
@@ -24,48 +25,54 @@
                 </div>
                 <section>
                                 <?php
-                                foreach ($news as $items => $key){
 
-                                    if($key['id'] == $id) {
-                                        $link = $key['link'];
-                                        $presentation = $key['presentation'];
-                                        echo "<font size='7'>".$key['programm_name']."</font><hr>";
+                                $sth = $connect->prepare("SELECT * FROM `programms` WHERE id = ".$_GET['id']);
+                                $sth->execute();
+                                $programms = $sth->fetchAll();
 
-                                        if($key['header'] != "") {
+                                if($programms){
+                                    foreach ($programms as $programm){
 
-                                            echo "<div class='alert alert-primary' role='alert'><font size='5'>Описание</font></div>";
+                                        if($programm['id'] == $_GET['id']) {
 
-                                            echo "<br><font size='5'>".$key['header']."</font>";
+                                            echo "<font size='7'>".$programm['programm_name']."</font><hr>
+                                              <div class='alert alert-primary' role='alert'><font size='5'>Описание</font></div>";
 
-                                        }
+                                            if($programm['description'] != "")
+                                                echo "<br><font size='5'>".$programm['description']."</font>";
+                                            else
+                                                echo "<center><div class='alert alert-warning' role='alert' style='width: 50%'><font size='5'>Описание отсутствует</font></div></center>";
 
-                                        if($key['teachers'] != "none") {
+                                            $sth = $connect->prepare("SELECT * FROM `programms_teacher_list` programms_teacher
+                                                                        INNER JOIN `teachers` teacher ON programms_teacher.id_teacher = teacher.id
+                                                                        WHERE programms_teacher.id_programm = ".$_GET['id']);
+                                            $sth->execute();
+                                            $teachers_in_programm = $sth->fetchAll();
 
-                                            $collections = get_all_programms($id,"collection");
                                             echo "<br><br><br><div class='alert alert-primary' role='alert'><font size='5'>Сотрудники</font></div><br>";
-                                            foreach ($collections as $item => $i)
-                                                echo "<p align='left'><font size='4'>• ".$i."</font></p>";
+                                            if($teachers_in_programm){
+                                                foreach ($teachers_in_programm as $teacher)
+                                                    echo "<p align='left'><font size='4'>• ".$teacher['name']."</font></p>";
+                                            }
+                                            else{
+                                                echo "<center><div class='alert alert-warning' role='alert' style='width: 50%'><font size='5'>Список преподавателей пуст</font></div></center>";
+                                            }
 
-                                            echo "</section><br>";
+                                            if($programm['presentation'])
+                                                echo "<input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`".$programm['presentation']."`)' value='Презентация'> ";
 
-                                            if($link)
-                                                echo "<input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`".$link."`)' value='Описание программы'> ";
-
-                                            if($presentation)
-                                                echo "<input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`".$presentation."`)' value='Презентация'> ";
+                                            if($programm['link'])
+                                                echo "<input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`".$programm['link']."`)' value='Описание программы'> ";
 
                                             echo "<input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'><br>";
+
                                         }
-                                        else
-                                            echo "Программа находится разработке, следите за <a href='arhive.php'>новостями</a></section><br><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'><br>";
                                     }
-
                                 }
-                                // Если такой записи в массиве нет
-                                if($id > $count)
-                                    echo "<font size='7'>Такой программы не существует!!!</font><br><br></section><br><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'><br>";
+                                else{
+                                    // Если такой записи в массиве нет
+                                    echo "<font size='7'>Такой программы не существует!!!</font><br><br></section><br><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'><br>";                                }
                                 ?>
-
 
                             </div>
                         </div>
@@ -74,6 +81,8 @@
         </div>
     </div>
 </div>
-<?php print_footer(); ?>
+
+<script src="../scripts/scripts.js"></script>
+
+<?php print_footer(get_config()); ?>
 </body>
-</html>

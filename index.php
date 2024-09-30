@@ -1,12 +1,14 @@
 ﻿<?php
     require_once('config.php');
-    require_once ('modules.php');
-    require_once('Arrays.php');
+    require_once('modules.php');
+    require_once ('engine/connect.php');
 
-    $configuration = get_config();
+    print_header("Цифровая кафедра  НИУ «БелГУ» ");
+
+    $connect = connect(get_config());
 
 ?>
-<?php print_header("Цифровая кафедра  НИУ «БелГУ» "); ?>
+
 
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
@@ -34,42 +36,39 @@
 
                             <div class="row">
                                 <?php
-                                $news = get_all_news(0,'none');
-                                $count = count($news);
-                                foreach ($news as $items => $key){
-                                    $news_header = $key['header'];
-                                    $news_date = $key['date'];
-                                    $program_img = $key['img'];
-                                    $news_id = $key['id'];
-                                    if($key['id'] <=3) {
-                                        echo "<div class='col-xs-12 col-sm-6 col-md-4'>
-                                    <div class='image-flip' ontouchstart='this.classList.toggle(`hover`);'>
-                                        <div class='mainflip'>
-                                            <div class='frontside'>
-                                                <div class='card'>
-                                                    <div class='card-body text-center'>
-                                                        <p><img width='150' class='img-fluid' src= $program_img ></p>
-                                                        <h4 class='card-text' style='border: 1px solid black'> $news_date </h4>
-                                                        <h4 class='card-title'> $news_header </h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class='backside'>
-                                                <div class='card'>
-                                                    <div class='card-body text-center mt-4'>
-                                                        <h4 class='card-title'>$news_header<br></h4>
-                                                        <p class='card-text'><a href='news.php?id=$news_id'>Подробнее</a></p>
-                                                        <ul class='list-inline'></ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>";}}?>
+                                $sth = $connect->prepare("SELECT * FROM `news` ORDER BY ID DESC LIMIT 3");
+                                $sth->execute();
+                                $news = $sth->fetchAll();
 
-                            </div>
-                        </div>
-                    </section>
+                                foreach ($news as $new){
+
+                                    echo "<div class='col-xs-12 col-sm-6 col-md-4'>
+                                            <div class='image-flip' ontouchstart='this.classList.toggle(`hover`);'>
+                                                <div class='mainflip'>
+                                                    <div class='frontside'>
+                                                        <div class='card'>
+                                                            <div class='card-body text-center'>
+                                                                <p><img width='150' class='img-fluid' src=".$new['header_pathimage']."></p>
+                                                                <h4 class='card-text' style='border: 1px solid black'> ".date('d.m.Y',$new['timestmp'])." </h4>
+                                                                <h4 class='card-title'> ".$new['header']." </h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class='backside'>
+                                                        <div class='card'>
+                                                            <div class='card-body text-center mt-4'>
+                                                                <h4 class='card-title'>".$new['header']."<br></h4>
+                                                                <p class='card-text'><a href='news.php?id=".$new['id']."'>Подробнее</a></p>
+                                                                <ul class='list-inline'></ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         </div>";}?>
+                                    </div>
+                                </div>
+                            </section>
 
                 </div>
             </div>
@@ -115,23 +114,22 @@
 
                         <div class="row">
                             <?php
-                            $programms = get_all_programms(0,'none');
-                            $count = count($programms);
-                            foreach ($programms as $items => $key){
-                                $program_header = $key['header'];
-                                $program_name = $key['programm_name'];
-                                $program_lead = $key['lead'];
-                                $program_img = $key['img'];
-                                $program_id = $key['id'];
-                                $program_link = $key['link'];
-                               echo "<div class='col-xs-12 col-sm-6 col-md-4'>
+
+                            $sth = $connect->prepare("SELECT * FROM `programms`");
+                            $sth->execute();
+                            $programms = $sth->fetchAll();
+
+                            if($programms){
+                                foreach ($programms as $programm){
+
+                                    echo "<div class='col-xs-12 col-sm-6 col-md-4'>
                                     <div class='image-flip' ontouchstart='this.classList.toggle(`hover`);'>
                                         <div class='mainflip'>
                                             <div class='frontside'>
                                                 <div class='card'>
                                                     <div class='card-body text-center'>
-                                                        <p><img class='img-fluid' src= $program_img ></p>
-                                                        <h4 class='card-title'> $program_name </h4>
+                                                        <p><img class='img-fluid' src= ".$programm['header_imagepath']." ></p>
+                                                        <h4 class='card-title'> ".$programm['programm_name']." </h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,27 +137,37 @@
                                                 <div class='card'>
                                                     <div class='card-body text-center mt-4'>
                                                         <h4 class='card-title'>";
-                                                        if($program_header == "Программа находится в разработке") {
-                                                            echo "$program_header<br></h4>
-                                                        <p class='card-text'>$program_lead<br><a href='programms.php?id=$program_id'>Подробнее</a></p>
-                                                        <ul class='list-inline'></ul>
+
+                                    $sth = $connect->prepare("SELECT * FROM `teachers` WHERE id = ".$programm['id_lead']);
+                                    $sth->execute();
+                                    $leads = $sth->fetchAll();
+
+                                    if($leads){
+                                        foreach ($leads as $lead){
+                                            echo $programm['programm_name']."<br></h4>
+                                                        <p class='card-text'>".$lead['name']." - ".$lead['position']."<br><a href='programms.php?id=".$programm['id']."'>Подробнее</a></p>
+                                                        <ul class='list-inline'></ul>";
+                                        }
+                                    }
+                                    else{
+                                        echo $programm['programm_name']."<br></h4>
+                                                        <p class='card-text'>Руководитель не назначен<br><a href='programms.php?id=".$programm['id']."'>Подробнее</a></p>
+                                                        <ul class='list-inline'></ul>";
+                                    }
+                                    echo "
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>";}
-                                                        else{
-                                                            echo "Руководитель программы:<br></h4>
-                                                        <p class='card-text'>$program_lead<br><a href='programms.php?id=$program_id'>Подробнее</a></p>
-                                                        <ul class='list-inline'></ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>";}
-                            }?>
+                                </div>";
+
+                                }
+                            }
+                            else{
+
+                            }
+?>
 
                         </div>
                     </div>
@@ -169,5 +177,5 @@
         </div>
     </div>
 </div>
-<?php print_footer($configuration); ?>
+<?php print_footer(get_config()); ?>
 </body>

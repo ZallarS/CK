@@ -1,6 +1,13 @@
 <?php
-require_once ('modules.php');
-require_once('Arrays.php');
+
+    require_once('config.php');
+    require_once ('modules.php');
+    require_once ('engine/connect.php');
+
+    print_header("Новости");
+
+    $connect = connect(get_config());
+
 ?>
 
 <style>
@@ -112,8 +119,6 @@ require_once('Arrays.php');
         opacity: 0.7;
     }
 </style>
-<html>
-<?php print_header("Новости"); ?>
 
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
@@ -128,26 +133,27 @@ require_once('Arrays.php');
                 <div class="d-flex justify-content-center mb-5" ></div>
 
                 <?php
-                    $id = $_GET['id'];
 
+                $sth = $connect->prepare("SELECT * FROM `news` where id =".$_GET['id']);
+                $sth->execute();
+                $news = $sth->fetchAll();
 
-                $news = get_all_news($id,"none");
+                foreach ($news as $new)
+                    if($new['id'] == $_GET['id']) {
+                        echo "<font size='7'>".$new['header']."</font><hr>
+            <section id='team' style='min-height: 400px'><font size='5'>". "<p align='justify'> ".$new['content']."</p></font>";
 
-                foreach ($news as $items => $key)
-                    if($key['id'] == $id) {
-                        echo "<font size='7'>".$key['header']."</font><hr>
-            <section id='team' style='min-height: 400px'><font size='5'>". "<p align='justify'> ".$key['content']."</p></font>";
+                        $sth = $connect->prepare("SELECT * FROM `news_image_list` where id_news =".$_GET['id']);
+                        $sth->execute();
+                        $images = $sth->fetchAll();
 
-                        if($key['collection_art'] != "none") {
+                        echo "<div class='gallery' onclick='openLightbox(event)'>";
 
-                            echo '<div class="gallery" onclick="openLightbox(event)">';
-                            $collections = get_all_news($id,"collection");
-                            foreach ($collections as $item => $i)
-                                echo "<img src=$i>";
+                        foreach ($images as $image){
+                            echo "<img src='".$image['news_imagepath']."'>";
 
-                            echo '</div>';
                         }
-
+                        echo "</div>";
                         echo "</section><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`arhive.php`)' value='К новостям'>";
                     }
                 ?>
@@ -156,9 +162,9 @@ require_once('Arrays.php');
                 <div id="lightbox">
                     <span id="close-btn" onclick="closeLightbox()">&times;</span>
 
-                        <img id="lightbox-img" src="">
+                    <img id="lightbox-img" src="">
 
-                        <div id="thumbnail-container"></div>
+                    <div id="thumbnail-container"></div>
                     <button id="next-btn" onclick="changeImage(1)">>>></button>
                     <button id="prev-btn" onclick="changeImage(-1)"><<<</button>
                 </div>
@@ -174,7 +180,6 @@ require_once('Arrays.php');
     </div>
 </div>
 
-
-<?php print_footer(); ?>
+<script src="js/list_images.js"></script>
+<?php print_footer(get_config()); ?>
 </body>
-</html>
