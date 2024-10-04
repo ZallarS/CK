@@ -77,12 +77,15 @@
 
     function print_nav(){
         echo '
-              <nav class="nav justify-content-center" style="background: #e6e6e6; padding: 7px 15px 15px 15px">
-                  <li class=""><a href="index.php" title="Цифровая кафедра НИУ &quot;БелГУ&quot;" style="margin: 0 15px 52px 0px;"><img style="border-radius: 15px; width:35px;" src="images/icons/LOGO_500 500_round_V2.png"></a></li>
-                  <li class=""><a href="schedule.php"  style="margin: 0 15px 0px 0px;" title="Расписание цифровой кафедры НИУ «БелГУ»"><img style="width:35px;" src="images/icons/schedule.png"></a></li>
-                  <li class=""><a href="arhive.php" style="margin: 0 15px 0px 0px;" title="Архив новостей"><img style="width:35px; " src=" images/icons/arhive.png"></a></li>
-                  <li class=""><a href="https://mail.bsu.edu.ru" style="margin: 0 15px 0px 0px;" title="Электронная почта НИУ «БелГУ»"><img style="width:35px;" src="images/icons/mail.png"></a></li>
-              </nav>';
+        <link href="libs/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        
+        <link href="css/ruang-admin.min.css" rel="stylesheet">
+        <nav class=" nav navbar navbar-expand navbar-light alert-primary topbar mb-4 static-top justify-content-center ">
+                <li class=""><a href="index.php" title="Цифровая кафедра НИУ &quot;БелГУ&quot;" style="margin: 0 15px 52px 0px;"><img style="border-radius: 15px; width:35px;" src="images/icons/LOGO_500 500_round_V2.png"></a></li>
+                <li class=""><a href="schedule.php"  style="margin: 0 15px 0px 0px;" title="Расписание цифровой кафедры НИУ «БелГУ»"><img style="width:35px;" src="images/icons/schedule.png"></a></li>
+                <li class=""><a href="arhive.php" style="margin: 0 15px 0px 0px;" title="Архив новостей"><img style="width:35px; " src=" images/icons/arhive.png"></a></li>
+                <li class=""><a href="https://mail.bsu.edu.ru" style="margin: 0 15px 0px 0px;" title="Электронная почта НИУ «БелГУ»"><img style="width:35px;" src="images/icons/mail.png"></a></li>
+        </nav>';
     }
     function print_popup(){
         echo '
@@ -98,16 +101,53 @@
                 <div class="modal-body">
                   <div class="mb-3">
                       <label for="formFileMultiple" class="form-label">Описание...</label>
-                      <input class="form-control" type="file" id="formFileMultiple" multiple onclick="update_popup(`result_excel_import_all`)">
+                      <input class="form-control" type="file" id="formFileMultiple" multiple >
                       <p id="result_excel_import_all"></p>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Закрыть</button>
-                  <button type="button" class="btn btn-primary">Сохранить</button>
+                  <button type="button" class="btn btn-primary" onclick="update_popup(`result_excel_import_all`)">Сохранить</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        ';
+
+        echo '
+          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="import_programm">Импорт программ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                      Список файлов:<br>';
+
+    $all = array_diff(scandir("../uploads/"), [".", ".."]);
+
+    foreach ($all as $ff) {
+        if (is_file("../uploads/" . $ff)) { echo "\n{$ff} - файл"; }
+        if (is_dir("../uploads/" . $ff)) { echo "\n{$ff} - папка"; }
+    }
+
+
+        echo '<p id="result_excel_import_programm"></p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Закрыть</button>
+                  <button type="button" class="btn btn-primary" onclick="import_programm()">Импортировать</button>
                 </div>
             </div>
           </div>
         </div>
         ';
     }
+
+
+

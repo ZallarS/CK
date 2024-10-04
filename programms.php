@@ -15,7 +15,9 @@
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
 <div class="container py-3">
-
+    <div class="alert alert-warning" role="alert">
+        Запись на программы ДПО осуществляется в личном кабинете по ссылке - <a href="https://dekanat.bsu.edu.ru/">ИнфоБелГУ: Учебный процесс</a><a>!
+        </a></div>
     <div class="col">
         <div class="card mb-1">
             <div class="card-body text-center">
@@ -70,8 +72,10 @@
                                     }
                                 }
                                 else{
+                                    echo "<div class='alert alert-danger' role='alert' ><font size='5'>Такой программы не существует!!!</font></div>";
                                     // Если такой записи в массиве нет
-                                    echo "<font size='7'>Такой программы не существует!!!</font><br><br></section><br><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'><br>";                                }
+                                    echo "</section><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'><br>";
+                                }
                                 ?>
 
                             </div>
@@ -82,7 +86,7 @@
     </div>
 </div>
 
-<script src="../scripts/scripts.js"></script>
+<script src="../js/scripts.js"></script>
 
 <?php print_footer(get_config()); ?>
 </body>

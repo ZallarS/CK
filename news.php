@@ -119,7 +119,8 @@
         opacity: 0.7;
     }
 </style>
-
+<script src="js/scripts.js"></script>
+<script src="js/list_images.js"></script>
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
 
@@ -138,7 +139,9 @@
                 $sth->execute();
                 $news = $sth->fetchAll();
 
-                foreach ($news as $new)
+
+            if($news){
+                foreach ($news as $new){
                     if($new['id'] == $_GET['id']) {
                         echo "<font size='7'>".$new['header']."</font><hr>
             <section id='team' style='min-height: 400px'><font size='5'>". "<p align='justify'> ".$new['content']."</p></font>";
@@ -151,13 +154,18 @@
 
                         foreach ($images as $image){
                             echo "<img src='".$image['news_imagepath']."'>";
-
                         }
                         echo "</div>";
-                        echo "</section><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`arhive.php`)' value='К новостям'>";
-                    }
-                ?>
+                        echo "</section><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`arhive.php`)' value='К новостям'> <input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'>";
 
+                    }
+                }
+            }
+            else{
+                echo "<div class='alert alert-danger' role='alert' ><font size='5'>Новости с таким id не существует!!!</font></div>";
+                echo "</section><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`arhive.php`)' value='К новостям'> <input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'><br>";
+            }
+                ?>
 
                 <div id="lightbox">
                     <span id="close-btn" onclick="closeLightbox()">&times;</span>
@@ -180,6 +188,6 @@
     </div>
 </div>
 
-<script src="js/list_images.js"></script>
+
 <?php print_footer(get_config()); ?>
 </body>
