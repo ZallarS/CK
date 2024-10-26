@@ -1,9 +1,7 @@
     function update_popup(mode){
 
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/main
+
             if (window.FormData === undefined) {
                 alert('В вашем браузере FormData не поддерживается')
             } else {
@@ -47,8 +45,7 @@
 
 
     }
-<<<<<<< HEAD
-=======
+
     function search(elem){
         if(elem.value.length > 1){
             $.ajax({
@@ -70,7 +67,7 @@
         }
 
     }
->>>>>>> origin/main
+
 
     function redirect(url) {
         window.location.replace(url);
