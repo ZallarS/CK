@@ -45,13 +45,13 @@
     </style>
 </head>
 <body>
-<h1>Проверка веб камеры онлайн</h1>
+<h1>Проверка веб камеры</h1>
 <div id="container">
     <video autoplay id="videoElement">
     </video>
 </div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="stop">Stop Video</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button id="start">Start Video</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="stop">Скрыть</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button id="start">Показать</button>
 <script>
 
     var video = document.querySelector("#videoElement");
@@ -70,7 +70,7 @@
                     video.srcObject = stream;
                 })
                 .catch(function (err0r) {
-                    console.log("Something went wrong!");
+                    console.log("Ошибка!");
                 });
         }
     }

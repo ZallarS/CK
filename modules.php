@@ -98,16 +98,53 @@
                 <div class="modal-body">
                   <div class="mb-3">
                       <label for="formFileMultiple" class="form-label">Описание...</label>
-                      <input class="form-control" type="file" id="formFileMultiple" multiple onclick="update_popup(`result_excel_import_all`)">
+                      <input class="form-control" type="file" id="formFileMultiple" multiple >
                       <p id="result_excel_import_all"></p>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Закрыть</button>
-                  <button type="button" class="btn btn-primary">Сохранить</button>
+                  <button type="button" class="btn btn-primary" onclick="update_popup(`result_excel_import_all`)">Сохранить</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        ';
+
+        echo '
+          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="import_programm">Импорт программ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                      Список файлов:<br>';
+
+    $all = array_diff(scandir("../uploads/"), [".", ".."]);
+
+    foreach ($all as $ff) {
+        if (is_file("../uploads/" . $ff)) { echo "\n{$ff} - файл"; }
+        if (is_dir("../uploads/" . $ff)) { echo "\n{$ff} - папка"; }
+    }
+
+
+        echo '<p id="result_excel_import_programm"></p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Закрыть</button>
+                  <button type="button" class="btn btn-primary" onclick="import_programm()">Импортировать</button>
                 </div>
             </div>
           </div>
         </div>
         ';
     }
+
+
+

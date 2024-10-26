@@ -4,7 +4,7 @@
     require_once('modules.php');
     require_once ('engine/connect.php');
 
-    print_header("Цифровая кафедра  НИУ «БелГУ» ");
+    print_header("Расписание");
 
     $connect = connect(get_config());
 
@@ -120,8 +120,6 @@
     }
 </style>
 
-<?php print_header("Расписание"); ?>
-
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
 
@@ -132,7 +130,7 @@
             <div class="card-body text-center">
                 <h5 class="my-3"></h5>
                 <p class="text-muted mb-1"></p>
-                <div class="d-flex justify-content-center mb-5" ><font size="6">Уважаемые преподаватели и студенты! Расписание временно не работает по ряду причин. Приносим извинения.</font></div>
+                <div class="d-flex justify-content-center mb-5" ><font size="6">Расписание в процессе формирования.</font></div>
 
             </div>
         </div>

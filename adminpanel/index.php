@@ -85,12 +85,12 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#excel_import"
                aria-expanded="true" aria-controls="excel_import">
                 <i class="far fa-fw fa-window-maximize"></i>
-                <span>Импорт</span>
+                <span>Загрузить</span>
             </a>
             <div id="excel_import" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Импорт</h6>
-                    <a class="collapse-item" data-toggle="modal" data-target="#exampleModalCenter" id="#modalCenter">Заполнить таблицы</a>
+                    <h6 class="collapse-header">Загрузить</h6>
+                    <a class="collapse-item" data-toggle="modal" data-target="#exampleModalCenter" id="#modalCenter">Загрузить программу</a>
                 </div>
             </div>
         </li>
@@ -116,11 +116,10 @@
             <div id="excel_scripts" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Скрипты</h6>
-                    <a class="collapse-item" href="">Скрипты</a>
+                    <a class="collapse-item" data-toggle="modal" data-target="#exampleModalCenter2" id="#modalCenter2">Импортировать web</a>
                 </div>
             </div>
         </li>
-
         <hr class="sidebar-divider">
 
         <div class="sidebar-heading">
@@ -485,7 +484,7 @@
   <script src="../libs/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../libs/jquery-easing/jquery.easing.min.js"></script>
   <script src="../js/ruang-admin.min.js"></script>
-  <script src="../libs/chart.js/Chart.min.js"></script>
-  <script src="../../js/demo/chart-area-demo.js"></script>
+
+  <script src="../js/scripts.js"></script>
 
 </body>

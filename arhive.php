@@ -23,7 +23,7 @@
                 </div><h5 class="section-title h1" id="News">Архив новостей</h5><br><br>
                 <section>
                     <div class="row gx-lg-5">
-                        <div class="col-lg-4 col-md-15 mb-4 "><div>
+                        <div class="col-lg-4 col-md-15 mb-4"><div>
 
                                 <?php
 
@@ -48,13 +48,17 @@
                         </div>
                         </div>
                     </div>
-                </section>
+<?php echo "</section><input class='btn btn-primary btn-secondary btn-block' type='button' onclick='redirect(`index.php`)' value='На главную'><br>"; ?>
             </div>
         </div>
     </div>
 </div>
+
+<script src="js/scripts.js"></script>
+
 <?php print_footer(get_config()); ?>
 </body>
+
 
 
 

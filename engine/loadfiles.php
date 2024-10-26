@@ -1,27 +1,12 @@
 <?php
     session_start();
 
+    require_once '../config.php';
     require_once 'connect.php';
     require_once 'libs.php';
-    require_once 'ajax_update.php';
 
     // Название <input type="file">
     $input_name = 'file';
-
-    // Разрешенные расширения файлов.
-    $allow = array('xls', 'xlsx');
-
-    // Запрещенные расширения файлов.
-    $deny = array(
-        'phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'pl', 'asp',
-        'aspx', 'shtml', 'shtm', 'htaccess', 'htpasswd', 'ini', 'log', 'sh', 'js', 'html',
-        'htm', 'css', 'sql', 'spl', 'scgi', 'fcgi', 'exe'
-    );
-
-    // Директория куда будут загружаться файлы.
-    $path =  '../images'; $error = $success = '';
-
-
 
     if(empty($_SESSION)){
         header('Location: login.php');
@@ -29,7 +14,24 @@
 
     $connect = connect(get_config());
 
-    if(CheckSQL($connect,"SELECT * FROM `users` WHERE `id` = ".$_SESSION['id'])){
+    // Директория куда будут загружаться файлы.
+    $path =  '../uploads/'; $error = $success = '';
+
+    // Разрешенные расширения файлов.
+    $allow = array('xls', 'xlsx', 'sql');
+
+    // Запрещенные расширения файлов.
+    $deny = array(
+        'phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'pl', 'asp',
+        'aspx', 'shtml', 'shtm', 'htaccess', 'htpasswd', 'ini', 'log', 'sh', 'js', 'html',
+        'htm', 'css', 'spl', 'scgi', 'fcgi', 'exe'
+    );
+
+    $sth = $connect->prepare("SELECT * FROM `users` where id =".$_SESSION['id']);
+    $sth->execute();
+    $users = $sth->fetchAll();
+
+if($users){
 
         if($_SESSION['id_role'] == 1){
 
@@ -61,12 +63,6 @@
                         if (move_uploaded_file($file['tmp_name'], $path . $name)) {
                             // Далее можно сохранить название файла в БД и т.п.
 
-                            $mode = $_GET['mode'];
-
-                            if($mode == "result_excel_import_all"){
-
-
-                            }
 
                             $success = '<p style="color: green">Файл «' . $name . '» успешно загружен.</p>';
                             $file = $name;
@@ -86,16 +82,15 @@
             $data = array(
                 'file'   => $file,
                 'error'   => $error,
-                'success' => $success,
-                'update' => ajax_update(get_config(),"excel_import_all")
+                'success' => $success
+
             );
         }
         else{
             $data = array(
                 'file'   => "Отсутствует",
                 'error'   => "Недостаточно прав",
-                'success' => "",
-                'update' => ajax_update(get_config(),"excel_import_all")
+                'success' => ""
             );
         }
 
