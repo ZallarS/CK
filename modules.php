@@ -77,12 +77,15 @@
 
     function print_nav(){
         echo '
-              <nav class="nav justify-content-center" style="background: #e6e6e6; padding: 7px 15px 15px 15px">
-                  <li class=""><a href="index.php" title="Цифровая кафедра НИУ &quot;БелГУ&quot;" style="margin: 0 15px 52px 0px;"><img style="border-radius: 15px; width:35px;" src="images/icons/LOGO_500 500_round_V2.png"></a></li>
-                  <li class=""><a href="schedule.php"  style="margin: 0 15px 0px 0px;" title="Расписание цифровой кафедры НИУ «БелГУ»"><img style="width:35px;" src="images/icons/schedule.png"></a></li>
-                  <li class=""><a href="arhive.php" style="margin: 0 15px 0px 0px;" title="Архив новостей"><img style="width:35px; " src=" images/icons/arhive.png"></a></li>
-                  <li class=""><a href="https://mail.bsu.edu.ru" style="margin: 0 15px 0px 0px;" title="Электронная почта НИУ «БелГУ»"><img style="width:35px;" src="images/icons/mail.png"></a></li>
-              </nav>';
+        <link href="libs/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        
+        <link href="css/ruang-admin.min.css" rel="stylesheet">
+        <nav class=" nav navbar navbar-expand navbar-light alert-primary topbar mb-4 static-top justify-content-center ">
+                <li class=""><a href="index.php" title="Цифровая кафедра НИУ &quot;БелГУ&quot;" style="margin: 0 15px 52px 0px;"><img style="border-radius: 15px; width:35px;" src="images/icons/LOGO_500 500_round_V2.png"></a></li>
+                <li class=""><a href="schedule.php"  style="margin: 0 15px 0px 0px;" title="Расписание цифровой кафедры НИУ «БелГУ»"><img style="width:35px;" src="images/icons/schedule.png"></a></li>
+                <li class=""><a href="arhive.php" style="margin: 0 15px 0px 0px;" title="Архив новостей"><img style="width:35px; " src=" images/icons/arhive.png"></a></li>
+                <li class=""><a href="https://mail.bsu.edu.ru" style="margin: 0 15px 0px 0px;" title="Электронная почта НИУ «БелГУ»"><img style="width:35px;" src="images/icons/mail.png"></a></li>
+        </nav>';
     }
     function print_popup(){
         echo '

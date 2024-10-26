@@ -13,7 +13,10 @@
 <body style="background-color: rgba(0, 0, 0, 0.05);">
 <?php print_nav(); ?>
 
-    <div class="container py-2">
+    <div class="container py-3">
+        <div class="alert alert-warning" role="alert">
+            Запись на программы ДПО осуществляется в личном кабинете по ссылке - <a href="https://dekanat.bsu.edu.ru/">ИнфоБелГУ: Учебный процесс<a>!
+        </div>
         <nav class="nav " style="background: #212529; padding: 7px 15px 15px 15px">
             <li class=""><a style="color: #ffffff; text-decoration: none; margin: 15px;" href="#News">Новости</a></li>
             <li class=""><a style="color: #ffffff; text-decoration: none; margin: 15px;" href="#about">О кафедре</a></li>
@@ -66,12 +69,13 @@
                                     </div>
                                 </div>
                             </section>
+
                 </div>
             </div>
         </div>
     </div>
 
-<div class="container py-2">
+<div class="container">
 
     <div class="col">
         <div class="card mb-4">
@@ -95,7 +99,7 @@
     </div>
 </div>
 
-<div class="container py-2">
+<div class="container py-5">
 
     <div class="col">
         <div class="card mb-4">

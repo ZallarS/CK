@@ -1,5 +1,9 @@
     function update_popup(mode){
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
             if (window.FormData === undefined) {
                 alert('В вашем браузере FormData не поддерживается')
             } else {
@@ -43,6 +47,30 @@
 
 
     }
+<<<<<<< HEAD
+=======
+    function search(elem){
+        if(elem.value.length > 1){
+            $.ajax({
+                type: "POST",
+                url: '../engine/schedule_search.php',
+                cache: false,
+                async: false,
+                contentType: false,
+                processData: false,
+                data:
+                {
+                    text: elem.value
+                },
+                dataType : 'html',
+                success: function(json_data){
+
+                }
+            });
+        }
+
+    }
+>>>>>>> origin/main
 
     function redirect(url) {
         window.location.replace(url);
